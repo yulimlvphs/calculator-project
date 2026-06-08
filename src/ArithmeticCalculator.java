@@ -40,4 +40,8 @@ public class ArithmeticCalculator<T extends Number> {
     public List<Double> getResults() {
         return results;
     }
+
+    public void setResults(List<Double> results) {
+        this.results = results;
+    }
 }
