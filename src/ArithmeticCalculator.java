@@ -44,4 +44,10 @@ public class ArithmeticCalculator<T extends Number> {
     public void setResults(List<Double> results) {
         this.results = results;
     }
+
+    public void removeResult() {
+        if(!results.isEmpty()) {
+            results.remove(0);
+        }
+    }
 }
