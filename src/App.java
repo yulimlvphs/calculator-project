@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-
             System.out.print("첫 번째 숫자를 입력하세요: ");
             int num1 = sc.nextInt();
 
@@ -15,38 +15,20 @@ public class App {
             System.out.print("사칙연산 기호를 입력하세요 (+, -, *, /): ");
             char operator = sc.next().charAt(0);
 
-            int result = 0;
-            boolean isValid = true;
-
-            switch (operator) {
-                case '+':
-                    result = num1 + num2;
-                    break;
-
-                case '-':
-                    result = num1 - num2;
-                    break;
-
-                case '*':
-                    result = num1 * num2;
-                    break;
-
-                case '/':
-                    if (num2 == 0) {
-                        System.out.println("나눗셈 연산에서 분모(두 번째 정수)에 0이 입력될 수 없습니다.");
-                        isValid = false;
-                    } else {
-                        result = num1 / num2;
-                    }
-                    break;
-
-                default:
-                    System.out.println("잘못된 연산 기호입니다.");
-                    isValid = false;
+            try {
+                int result = calculator.calculate(num1, num2, operator);
+                System.out.println("결과: " + result);
+                System.out.println("저장된 연산 결과: " + calculator.getResults());
+            } catch (ArithmeticException | IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
 
-            if (isValid) {
-                System.out.println("결과: " + result);
+            System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제): ");
+            String removeAnswer = sc.next();
+
+            if (removeAnswer.equals("remove")) {
+                calculator.removeResult();
+                System.out.println("삭제 후 저장된 연산 결과: " + calculator.getResults());
             }
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
