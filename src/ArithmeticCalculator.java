@@ -34,7 +34,7 @@ public class ArithmeticCalculator<T extends Number> {
                 result = number1 / number2;
                 break;
         }
-        result = number1 / number2;
+        results.add(result);
         return result;
     }
 
